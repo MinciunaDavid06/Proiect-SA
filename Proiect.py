@@ -2,8 +2,8 @@ import time
 import random
 import sys
 sys.setrecursionlimit(10**6) #creste limita de la recursivitate (quick sort e obraznica)
-
 def bubbleSort(l):
+    l= l.copy()
     n=len(l)
     for i in range(n):
         swapped=False
@@ -16,6 +16,7 @@ def bubbleSort(l):
     return l
 
 def selectionSort(l):
+    l= l.copy()
     n=len(l)
     for i in range(n-1):
         minim=i
@@ -26,6 +27,7 @@ def selectionSort(l):
     return l
 
 def insertionSort(l):
+    l= l.copy()
     n=len(l)
     if n <= 1:
         return l
@@ -36,11 +38,13 @@ def insertionSort(l):
             l[j+1]=l[j]
             j-=1
         l[j+1]=key   
+    return l
 
 def quickSort(l):
+    l= l.copy()
     if len(l)<=1:
         return l
-    pivot=l[0]
+    pivot = l[0]
     st=[]
     dr=[]
     for i in l[1:]:
@@ -49,6 +53,7 @@ def quickSort(l):
         else:
             dr.append(i)
     return quickSort(st)+[pivot]+quickSort(dr)
+
 
 def lista_aleatoare(n, min_val=0, max_val=100000):
     l=[]
@@ -71,6 +76,7 @@ def lista_aproape_sortata(n):
         l[x],l[y]=l[y],l[x]
     return l
 
+
 def timp_sortare(functie, l):
     start=time.time()
     functie(l)
@@ -78,7 +84,7 @@ def timp_sortare(functie, l):
     return end-start
 
 n=int(input("Introdu Dimensiunea Listei: "))
-
+#pentru lista random#
 l1=lista_aleatoare(n)
 print("\nLista aleatore:")
 print(f"Bubble: {timp_sortare(bubbleSort,l1):.6f} sec")
@@ -86,6 +92,7 @@ print(f"Selection: {timp_sortare(selectionSort,l1):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l1):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l1):.6f} sec")
 
+#lista sortata#
 l2=lista_sortata(n)
 print("\nLista sortata:")
 print(f"Bubble: {timp_sortare(bubbleSort,l2):.6f} sec")
@@ -93,6 +100,7 @@ print(f"Selection: {timp_sortare(selectionSort,l2):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l2):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l2):.6f} sec")
 
+#lista sortata invers#
 l3=lista_invers_sortata(n)
 print("\nLista sortata invers:")
 print(f"Bubble: {timp_sortare(bubbleSort,l3):.6f} sec")
@@ -100,6 +108,7 @@ print(f"Selection: {timp_sortare(selectionSort,l3):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l3):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l3):.6f} sec")
 
+#lista aproapte sortata#
 l4=lista_aproape_sortata(n)
 print("\nLista aproape sortata:")
 print(f"Bubble: {timp_sortare(bubbleSort,l4):.6f} sec")
