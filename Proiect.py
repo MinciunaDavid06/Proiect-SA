@@ -54,6 +54,55 @@ def quickSort(l):
             dr.append(i)
     return quickSort(st)+[pivot]+quickSort(dr)
 
+def mergeSort(l):
+    l = l.copy()
+    if len(l) <= 1:
+        return l
+    mijloc = len(l) // 2
+    stanga = mergeSort(l[:mijloc])
+    dreapta = mergeSort(l[mijloc:])
+    return interclasare(stanga, dreapta)
+def interclasare(stanga, dreapta):
+    rezultat = []
+    i = 0
+    j = 0
+    while i < len(stanga) and j < len(dreapta):
+        if stanga[i] <= dreapta[j]:
+            rezultat.append(stanga[i])
+            i += 1
+        else:
+            rezultat.append(dreapta[j])
+            j += 1
+    while i < len(stanga):
+        rezultat.append(stanga[i])
+        i += 1
+    while j < len(dreapta):
+        rezultat.append(dreapta[j])
+        j += 1
+    return rezultat
+
+def heapSort(l):
+    l = l.copy()
+    n = len(l)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(l, n, i)
+    for i in range(n - 1, 0, -1):
+        l[0], l[i] = l[i], l[0]
+        heapify(l, i, 0)
+
+    return l
+
+def heapify(l, n, i):
+    maxim = i
+    stanga = 2 * i + 1
+    dreapta = 2 * i + 2
+    if stanga < n and l[stanga] > l[maxim]:
+        maxim = stanga
+    if dreapta < n and l[dreapta] > l[maxim]:
+        maxim = dreapta
+    if maxim != i:
+        l[i], l[maxim] = l[maxim], l[i]
+        heapify(l, n, maxim)
 
 def lista_aleatoare(n, min_val=0, max_val=100000):
     l=[]
@@ -91,6 +140,8 @@ print(f"Bubble: {timp_sortare(bubbleSort,l1):.6f} sec")
 print(f"Selection: {timp_sortare(selectionSort,l1):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l1):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l1):.6f} sec")
+print(f"Merge: {timp_sortare(mergeSort, l1):.6f} sec")
+print(f"Heap: {timp_sortare(heapSort, l1):.6f} sec")
 
 #lista sortata#
 l2=lista_sortata(n)
@@ -99,6 +150,8 @@ print(f"Bubble: {timp_sortare(bubbleSort,l2):.6f} sec")
 print(f"Selection: {timp_sortare(selectionSort,l2):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l2):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l2):.6f} sec")
+print(f"Merge: {timp_sortare(mergeSort, l2):.6f} sec")
+print(f"Heap: {timp_sortare(heapSort, l2):.6f} sec")
 
 #lista sortata invers#
 l3=lista_invers_sortata(n)
@@ -107,6 +160,8 @@ print(f"Bubble: {timp_sortare(bubbleSort,l3):.6f} sec")
 print(f"Selection: {timp_sortare(selectionSort,l3):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l3):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l3):.6f} sec")
+print(f"Merge: {timp_sortare(mergeSort, l3):.6f} sec")
+print(f"Heap: {timp_sortare(heapSort, l3):.6f} sec")
 
 #lista aproapte sortata#
 l4=lista_aproape_sortata(n)
@@ -115,3 +170,5 @@ print(f"Bubble: {timp_sortare(bubbleSort,l4):.6f} sec")
 print(f"Selection: {timp_sortare(selectionSort,l4):.6f} sec")
 print(f"Insertion: {timp_sortare(insertionSort,l4):.6f} sec")
 print(f"Quick: {timp_sortare(quickSort,l4):.6f} sec")
+print(f"Merge: {timp_sortare(mergeSort, l4):.6f} sec")
+print(f"Heap: {timp_sortare(heapSort, l4):.6f} sec")
